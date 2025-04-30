@@ -1,19 +1,41 @@
-<h2 align="center">🚧 This repository has been archived 🚧</h2>
+# About
 
-GTK, while being one of our most popular ports, can only be described as a
-nightmare to consistently theme and maintain. To understand why this port has
-been archived, please see [#262](https://github.com/catppuccin/gtk/issues/262).
+This is a fork of discontinued catppuccin gtk theme, that are based a [Colloid](https://github.com/vinceliuice/Colloid-gtk-theme) theme made by [Vinceliuice](https://github.com/vinceliuice)
 
-We recognise that users will still want to theme GTK in Catppuccin. This
-repository has been heavily refactored to be more maintainable and
-understandable by others. The usage and installation instructions can be found
-in [docs/USAGE.md](/docs/USAGE.md) and a detailed description of the codebase
-structure can be found in [docs/ARCHITECTURE.md](/docs/ARCHITECTURE.md).
+# Usage 
 
-Good luck.
+### Requirements
+- GTK '>=3.20'
+- `gnome-themes-extra`
 
-&nbsp;
+#Installation
 
-<p align="center"><img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true" /></p>
-<p align="center">Copyright &copy; 2021-present <a href="https://github.com/catppuccin" target="_blank">Catppuccin Org</a>
-<p align="center"><a href="https://github.com/catppuccin/gtk/blob/main/LICENSE"><img src="https://img.shields.io/static/v1.svg?style=for-the-badge&label=License&message=GPLv3&logoColor=d9e0ee&colorA=363a4f&colorB=b7bdf8"/></a></p>
+1. Download theme zip from [releases](https://github.com/VanillaDaFur/catppuccin-gtk/releases/)
+2. Extract the archive to a ~/.themes folder
+3. Select the downloaded theme via your desktop specific tweak application (**gnome-tweaks** on GNOME)
+
+### For GTK 4 applications
+To theme GTK 4 applications you have to manually symlink the `~/.config/gtk-4.0` to the themes folder. Use the following commands
+
+```bash
+mkdir -p "${HOME}/.config/gtk-4.0"
+ln -sf "${THEME_DIR}/gtk-4.0/assets" "${HOME}/.config/gtk-4.0/assets"
+ln -sf "${THEME_DIR}/gtk-4.0/gtk.css" "${HOME}/.config/gtk-4.0/gtk.css"
+ln -sf "${THEME_DIR}/gtk-4.0/gtk-dark.css" "${HOME}/.config/gtk-4.0/gtk-dark.css"
+```
+
+### For Flatpak applications
+
+1. To give your Flatpak applications access to your themes folder run:
+
+```bash
+flatpak override --filesystem=$HOME/.themes:ro
+```
+
+2. To give your Flatpak applications access to the `~/.config/gtk-3.0` and `~/.config/gtk-4.0` configuration directories run:
+
+```bash
+flatpak override --user --filesystem=xdg-config/gtk-3.0:ro
+flatpak override --user --filesystem=xdg-config/gtk-4.0:ro
+```
+
