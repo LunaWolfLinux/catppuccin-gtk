@@ -29,7 +29,7 @@ ln -sf "${THEME_DIR}/gtk-4.0/gtk-dark.css" "${HOME}/.config/gtk-4.0/gtk-dark.css
 1. To give your Flatpak applications access to your themes folder run:
 
 ```bash
-flatpak override --filesystem=$HOME/.themes:ro
+flatpak override --user --filesystem=$HOME/.themes:ro
 ```
 
 2. To give your Flatpak applications access to the `~/.config/gtk-3.0` and `~/.config/gtk-4.0` configuration directories run:

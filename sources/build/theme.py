@@ -5,7 +5,7 @@ import glob
 import zipfile
 from .logger import logger
 from .utils import find_and_replace, Subsitution
-from .context import BuildContext, IS_DARK, IS_LIGHT, IS_WINDOW_NORMAL, DARK_LIGHT
+from .context import BuildContext, IS_DARK, IS_WINDOW_NORMAL, DARK_LIGHT
 
 
 def apply_tweaks(ctx: BuildContext):
@@ -18,7 +18,8 @@ def apply_tweaks(ctx: BuildContext):
         f"{ctx.colloid_src_dir}/sass/_tweaks-temp.scss",
         Subsitution(
             find="@import 'color-palette-default';",
-            replace=f"@import 'color-palette-catppuccin-{ctx.flavor.identifier}';",
+            replace=f"@import 'color-palette-catppuccin-{
+                ctx.flavor.identifier}';",
         ),
     )
     ctx.apply_tweak("colorscheme", "'default'", "'catppuccin'")
@@ -76,7 +77,8 @@ def execute_build(ctx: BuildContext):
 
     sassc_tasks.append(
         compile_sass(
-            f"{src_dir}/main/gnome-shell/gnome-shell{ctx.apply_suffix(DARK_LIGHT)}.scss",
+            f"{src_dir}/main/gnome-shell/gnome-shell{
+                ctx.apply_suffix(DARK_LIGHT)}.scss",
             f"{output_dir}/gnome-shell/gnome-shell.css",
         )
     )
@@ -112,7 +114,8 @@ def execute_build(ctx: BuildContext):
     os.makedirs(f"{output_dir}/cinnamon", exist_ok=True)
     sassc_tasks.append(
         compile_sass(
-            f"{src_dir}/main/cinnamon/cinnamon{ctx.apply_suffix(DARK_LIGHT)}.scss",
+            f"{src_dir}/main/cinnamon/cinnamon{
+                ctx.apply_suffix(DARK_LIGHT)}.scss",
             f"{output_dir}/cinnamon/cinnamon.css",
         )
     )
@@ -122,19 +125,20 @@ def execute_build(ctx: BuildContext):
 
     os.makedirs(f"{output_dir}/metacity-1", exist_ok=True)
     shutil.copyfile(
-        f"{src_dir}/main/metacity-1/metacity-theme-3{ctx.apply_suffix(IS_WINDOW_NORMAL)}.xml",
+        f"{src_dir}/main/metacity-1/metacity-theme-3{
+            ctx.apply_suffix(IS_WINDOW_NORMAL)}.xml",
         f"{output_dir}/metacity-1/metacity-theme-3.xml",
     )
 
     os.makedirs(f"{output_dir}/xfwm4", exist_ok=True)
     shutil.copyfile(
-        f"{src_dir}/main/xfwm4/themerc{ctx.apply_suffix(IS_LIGHT)}",
+        f"{src_dir}/main/xfwm4/themerc",
         f"{output_dir}/xfwm4/themerc",
     )
 
     os.makedirs(f"{output_dir}-hdpi/xfwm4", exist_ok=True)
     shutil.copyfile(
-        f"{src_dir}/main/xfwm4/themerc{ctx.apply_suffix(IS_LIGHT)}",
+        f"{src_dir}/main/xfwm4/themerc",
         f"{output_dir}-hdpi/xfwm4/themerc",
     )
     find_and_replace(
@@ -144,7 +148,7 @@ def execute_build(ctx: BuildContext):
 
     os.makedirs(f"{output_dir}-xhdpi/xfwm4", exist_ok=True)
     shutil.copyfile(
-        f"{src_dir}/main/xfwm4/themerc{ctx.apply_suffix(IS_LIGHT)}",
+        f"{src_dir}/main/xfwm4/themerc",
         f"{output_dir}-xhdpi/xfwm4/themerc",
     )
 
@@ -175,7 +179,8 @@ def make_assets(ctx: BuildContext):
     for file in glob.glob(f"{src_dir}/assets/cinnamon/theme/*.svg"):
         shutil.copy(file, f"{output_dir}/cinnamon/assets")
     shutil.copy(
-        f"{src_dir}/assets/cinnamon/thumbnail{ctx.apply_suffix(DARK_LIGHT)}.svg",
+        f"{src_dir}/assets/cinnamon/thumbnail{
+            ctx.apply_suffix(DARK_LIGHT)}.svg",
         f"{output_dir}/cinnamon/thumbnail.png",
     )
 
@@ -302,15 +307,18 @@ def make_assets(ctx: BuildContext):
         shutil.copy(file, f"{output_dir}/gtk-4.0/assets")
 
     for file in glob.glob(
-        f"{src_dir}/assets/metacity-1/assets{ctx.apply_suffix(IS_WINDOW_NORMAL)}/*.svg"
+        f"{src_dir}/assets/metacity-1/assets{
+            ctx.apply_suffix(IS_WINDOW_NORMAL)}/*.svg"
     ):
         shutil.copy(file, f"{output_dir}/metacity-1/assets")
     shutil.copy(
-        f"{src_dir}/assets/metacity-1/thumbnail{ctx.apply_suffix(IS_DARK)}.png",
+        f"{src_dir}/assets/metacity-1/thumbnail{
+            ctx.apply_suffix(IS_DARK)}.png",
         f"{output_dir}/metacity-1/thumbnail.png",
     )
 
-    xfwm4_assets = f"{ctx.git_root}/patches/xfwm4/generated/assets-catppuccin-{ctx.flavor.identifier}"
+    xfwm4_assets = f"{
+        ctx.git_root}/patches/xfwm4/generated/assets-catppuccin-{ctx.flavor.identifier}"
     for file in glob.glob(xfwm4_assets + "/*"):
         shutil.copy(file, f"{output_dir}/xfwm4")
 
@@ -328,7 +336,8 @@ def zip_dir(path, zip_file):
         for file in files:
             zip_file.write(
                 os.path.join(root, file),
-                os.path.relpath(os.path.join(root, file), os.path.join(path, "..")),
+                os.path.relpath(os.path.join(root, file),
+                                os.path.join(path, "..")),
             )
 
 
