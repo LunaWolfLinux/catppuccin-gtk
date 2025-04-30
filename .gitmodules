@@ -1,6 +1,4 @@
-[submodule "colloid"]
+
+[submodule "sources/colloid"]
 	path = sources/colloid
-	url = https://github.com/vinceliuice/Colloid-gtk-theme.git
-[submodule "sources/Colloid-gtk-theme"]
-	path = sources/Colloid-gtk-theme
 	url = https://github.com/vinceliuice/Colloid-gtk-theme
