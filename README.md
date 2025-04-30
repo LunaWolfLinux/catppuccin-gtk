@@ -8,7 +8,7 @@ This is a fork of discontinued catppuccin gtk theme, that are based a [Colloid](
 - GTK '>=3.20'
 - `gnome-themes-extra`
 
-#Installation
+# Installation
 
 1. Download theme zip from [releases](https://github.com/VanillaDaFur/catppuccin-gtk/releases/)
 2. Extract the archive to a ~/.themes folder
