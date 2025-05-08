@@ -39,3 +39,26 @@ flatpak override --user --filesystem=xdg-config/gtk-3.0:ro
 flatpak override --user --filesystem=xdg-config/gtk-4.0:ro
 ```
 
+# Manual Building
+Run the following command in the terminal
+```
+python build.py
+```
+> Tip: `python build.py` allows (and requires *) the following options:
+```
+Compulsory field *      Specify color variant(s) [mocha|frappe|macchiato|latte|all]
+-d, --dest DIR *        Specify destination directory
+-n, --name NAME *       Specify theme name
+-a, --accent VARIANT *  Specify theme color variant(s) [rosewater|flamingo|pink|mauve|red|maroon|peach|yellow|green|teal|sky|
+                        sapphire|blue|lavender|all]
+-s, --size VARIANT      Specify size variant [standard|compact] (Default: standard variant)
+-l, --link              Link installed gtk-4.0 theme to config folder for all libadwaita app use this theme
+--zip                   Zips up the finally produced themes.
+--tweaks                Specify versions for tweaks [black|rimless|normal|float]
+                        1. black:    Blackness color version
+                        2. rimless:  Remove the 1px border about windows and menus
+                        3. normal:   Normal windows button style (titlebuttons: max/min/close)
+                        4. float:    Floating gnome-shell panel style
+-h, --help              Show help
+```
+```
