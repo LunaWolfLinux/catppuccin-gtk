@@ -97,8 +97,8 @@ def parse_args():
 
 
 def build_release_url(ctx: InstallContext) -> str:
-    repo_root = "https://github.com/catppuccin/gtk/releases/download"
-    release = "v1.0.3" # x-release-please-version
+    repo_root = "https://github.com/VanillaDaFur/catppuccin-gtk/releases/download"
+    release = "1.0.4"  # x-release-please-version
     zip_name = f"catppuccin-{ctx.flavor}-{ctx.accent}-standard+default.zip"
 
     return f"{repo_root}/{release}/{zip_name}"
@@ -117,7 +117,8 @@ def fetch_zip(url: str) -> Optional[zipfile.ZipFile]:
     logger.info("Verifying download..")
     first_bad_file = zip_file.testzip()
     if first_bad_file is not None:
-        logger.error(f'Zip appears to be corrupt, first bad file is "{first_bad_file}"')
+        logger.error(f'Zip appears to be corrupt, first bad file is "{
+                     first_bad_file}"')
         return None
     logger.info("Download verified")
     return zip_file
@@ -128,9 +129,11 @@ def add_libadwaita_links(ctx: InstallContext, rewrite: bool = False):
     if ctx.flavor != "latte":
         suffix = "dark"
     dir_name = (
-        ctx.dest / f"catppuccin-{ctx.flavor}-{ctx.accent}-standard+default-{suffix}" / "gtk-4.0"
+        ctx.dest /
+        f"catppuccin-{ctx.flavor}-{ctx.accent}-standard+default-{suffix}" / "gtk-4.0"
     ).absolute()
-    gtk4_dir = (Path(os.path.expanduser("~")) / ".config" / "gtk-4.0").absolute()
+    gtk4_dir = (Path(os.path.expanduser("~")) /
+                ".config" / "gtk-4.0").absolute()
     os.makedirs(gtk4_dir, exist_ok=True)
 
     logger.info("Adding symlinks for libadwaita")
@@ -173,7 +176,8 @@ def install_from_artifact(ctx: InstallContext, artifact_path: Path):
     logger.info("Verifying artifact...")
     first_bad_file = artifacts.testzip()
     if first_bad_file is not None:
-        logger.error(f'Zip appears to be corrupt, first bad file is "{first_bad_file}"')
+        logger.error(f'Zip appears to be corrupt, first bad file is "{
+                     first_bad_file}"')
         return None
     logger.info("Artifact verified")
 
