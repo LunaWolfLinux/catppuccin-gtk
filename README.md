@@ -61,4 +61,3 @@ Compulsory field *      Specify color variant(s) [mocha|frappe|macchiato|latte|a
                         4. float:    Floating gnome-shell panel style
 -h, --help              Show help
 ```
-```
