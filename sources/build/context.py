@@ -45,7 +45,8 @@ class BuildContext:
         return f"{self.output_root}/{self.build_id()}"
 
     def build_id(self) -> str:
-        return f"{self.theme_name}-{self.flavor.identifier}-{self.accent.identifier}-{self.size}+{self.tweaks.id() or 'default'}"
+        tweaks = f"+{self.tweaks.id()}" if self.tweaks.id() != "" else ""
+        return f"{self.theme_name}-{self.flavor.identifier}-{self.accent.identifier}-{self.size}" + tweaks
 
     def apply_suffix(self, suffix: Suffix) -> str:
         if suffix.test(self):
