@@ -8,8 +8,7 @@ def apply_colloid_patches(colloid_dir, patch_dir):
     colloid_dir = Path(colloid_dir).relative_to(os.getcwd())
     if os.path.isfile(colloid_dir / ".patched"):
         logger.info(
-            f'Patches seem to be applied, remove "{
-                colloid_dir}/.patched" to force application (this may fail)'
+            f'Patches seem to be applied, remove "{colloid_dir}/.patched" to force application (this may fail)'
         )
         return
 

@@ -18,8 +18,7 @@ def apply_tweaks(ctx: BuildContext):
         f"{ctx.colloid_src_dir}/sass/_tweaks-temp.scss",
         Subsitution(
             find="@import 'color-palette-default';",
-            replace=f"@import 'color-palette-catppuccin-{
-                ctx.flavor.identifier}';",
+            replace=f"@import 'color-palette-catppuccin-{ctx.flavor.identifier}';",
         ),
     )
     ctx.apply_tweak("colorscheme", "'default'", "'catppuccin'")
@@ -77,8 +76,7 @@ def execute_build(ctx: BuildContext):
 
     sassc_tasks.append(
         compile_sass(
-            f"{src_dir}/main/gnome-shell/gnome-shell{
-                ctx.apply_suffix(DARK_LIGHT)}.scss",
+            f"{src_dir}/main/gnome-shell/gnome-shell{ctx.apply_suffix(DARK_LIGHT)}.scss",
             f"{output_dir}/gnome-shell/gnome-shell.css",
         )
     )
@@ -114,8 +112,7 @@ def execute_build(ctx: BuildContext):
     os.makedirs(f"{output_dir}/cinnamon", exist_ok=True)
     sassc_tasks.append(
         compile_sass(
-            f"{src_dir}/main/cinnamon/cinnamon{
-                ctx.apply_suffix(DARK_LIGHT)}.scss",
+            f"{src_dir}/main/cinnamon/cinnamon{ctx.apply_suffix(DARK_LIGHT)}.scss",
             f"{output_dir}/cinnamon/cinnamon.css",
         )
     )
@@ -125,8 +122,7 @@ def execute_build(ctx: BuildContext):
 
     os.makedirs(f"{output_dir}/metacity-1", exist_ok=True)
     shutil.copyfile(
-        f"{src_dir}/main/metacity-1/metacity-theme-3{
-            ctx.apply_suffix(IS_WINDOW_NORMAL)}.xml",
+        f"{src_dir}/main/metacity-1/metacity-theme-3{ctx.apply_suffix(IS_WINDOW_NORMAL)}.xml",
         f"{output_dir}/metacity-1/metacity-theme-3.xml",
     )
 
@@ -179,8 +175,7 @@ def make_assets(ctx: BuildContext):
     for file in glob.glob(f"{src_dir}/assets/cinnamon/theme/*.svg"):
         shutil.copy(file, f"{output_dir}/cinnamon/assets")
     shutil.copy(
-        f"{src_dir}/assets/cinnamon/thumbnail{
-            ctx.apply_suffix(DARK_LIGHT)}.svg",
+        f"{src_dir}/assets/cinnamon/thumbnail{ctx.apply_suffix(DARK_LIGHT)}.svg",
         f"{output_dir}/cinnamon/thumbnail.png",
     )
 
@@ -307,18 +302,15 @@ def make_assets(ctx: BuildContext):
         shutil.copy(file, f"{output_dir}/gtk-4.0/assets")
 
     for file in glob.glob(
-        f"{src_dir}/assets/metacity-1/assets{
-            ctx.apply_suffix(IS_WINDOW_NORMAL)}/*.svg"
+        f"{src_dir}/assets/metacity-1/assets{ctx.apply_suffix(IS_WINDOW_NORMAL)}/*.svg"
     ):
         shutil.copy(file, f"{output_dir}/metacity-1/assets")
     shutil.copy(
-        f"{src_dir}/assets/metacity-1/thumbnail{
-            ctx.apply_suffix(IS_DARK)}.png",
+        f"{src_dir}/assets/metacity-1/thumbnail{ctx.apply_suffix(IS_DARK)}.png",
         f"{output_dir}/metacity-1/thumbnail.png",
     )
 
-    xfwm4_assets = f"{
-        ctx.git_root}/patches/xfwm4/generated/assets-catppuccin-{ctx.flavor.identifier}"
+    xfwm4_assets = f"{ctx.git_root}/patches/xfwm4/generated/assets-catppuccin-{ctx.flavor.identifier}"
     for file in glob.glob(xfwm4_assets + "/*"):
         shutil.copy(file, f"{output_dir}/xfwm4")
 
@@ -384,7 +376,7 @@ def build_with_context(ctx: BuildContext):
 def gnome_shell_version(src_dir):
     # Hardcoded here, Colloid checks for this on end user machines
     # but we cannot do that. Old build system would've resulted in this too.
-    gs_version = "46-0"
+    gs_version = "48-0"
 
     shutil.copyfile(
         f"{src_dir}/sass/gnome-shell/_common.scss",
